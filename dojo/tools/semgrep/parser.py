@@ -17,7 +17,7 @@ class SemgrepJSONParser(object):
 
             for item in results:
                 title = item['check_id']
-                semgrep_result = SemgrepJSONResult(item['extra'], item['path'], item['start'], item['end'])
+                semgrep_result = SemgrepJSONResult(title, item['extra'], item['path'], item['start'], item['end'])
 
                 findingItem = Finding(
                     title=semgrep_result.title,
