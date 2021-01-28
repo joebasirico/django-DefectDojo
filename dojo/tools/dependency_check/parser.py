@@ -239,7 +239,7 @@ class DependencyCheckParser(object):
             numerical_severity=Finding.get_numerical_severity(severity),
             static_finding=True,
             references=reference_detail,
-            component_name=component_name,
+            component_name=component_name[0:200],
             component_version=component_version)
 
     def __init__(self, filename, test):
