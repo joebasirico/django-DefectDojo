@@ -1715,6 +1715,13 @@ class Finding(models.Model):
                                         verbose_name="Number of occurences",
                                         help_text="Number of occurences in the source tool when several vulnerabilites were found and aggregated by the scanner.")
 
+    #CUSTOM Code for HS
+    customfield_11542 = models.CharField(null=True,
+                                           blank=True,
+                                           max_length=4000,
+                                           verbose_name="Repro Environment",
+                                           help_text="Custom field for HS JIRA.")
+
     tags_from_django_tagging = models.TextField(editable=False, blank=True, help_text=_('Temporary archive with tags from the previous tagging library we used'))
     tags = TagField(blank=True, force_lowercase=True, help_text="Add tags that help describe this finding. Choose from the list or add new tags. Press Enter key to add.")
 

@@ -461,10 +461,13 @@ def add_jira_issue(find):
                         'key': jira_project.project_key
                     },
                     'summary': find.title,
+                    #CUSTOM HS Code. For now this is hard coded to prod.
+                    #TODO: grab the real value from the finding.
+                    'customfield_11542': [ { "value": "Production" } ],
                     'description': jira_description(find),
                     'issuetype': {
                         'name': jira_instance.default_issue_type
-                    },
+                    }
             }
 
             if jira_project.component:
