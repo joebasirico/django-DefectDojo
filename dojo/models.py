@@ -1720,7 +1720,7 @@ class Finding(models.Model):
                                            blank=True,
                                            max_length=4000,
                                            verbose_name="Repro Environment",
-                                           help_text="Custom field for HS JIRA.")
+                                           help_text="Custom field for HS JIRA. Options are: [Production|Latest / Staging], must match exactly.")
 
     tags_from_django_tagging = models.TextField(editable=False, blank=True, help_text=_('Temporary archive with tags from the previous tagging library we used'))
     tags = TagField(blank=True, force_lowercase=True, help_text="Add tags that help describe this finding. Choose from the list or add new tags. Press Enter key to add.")

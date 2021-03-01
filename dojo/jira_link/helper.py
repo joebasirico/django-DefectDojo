@@ -470,6 +470,9 @@ def add_jira_issue(find):
                     }
             }
 
+            #CUSTOM HS Code
+            fields['customfield_11542'] = [ { "value": find.customfield_11542 } ]
+
             if jira_project.component:
                 fields['components'] = [
                         {
