@@ -272,7 +272,7 @@ def get_jira_connection_raw(jira_server, jira_username, jira_password):
         else:
             log_jira_generic_alert('Unknown JIRA Connection Error', e)
 
-        add_error_message_to_response('Unable to authenticate to JIRA. Please check the URL, username, password, captcha challenge, Network connection. Details in alert on top right. ' + e.message)
+        add_error_message_to_response('Unable to authenticate to JIRA. Please check the URL, username, password, captcha challenge, Network connection. Details in alert on top right. ' + e.text)
         raise e
 
     except requests.exceptions.RequestException as re:
@@ -461,10 +461,13 @@ def add_jira_issue(find):
                         'key': jira_project.project_key
                     },
                     'summary': find.title,
+                    #CUSTOM HS Code. For now this is hard coded to prod.
+                    #TODO: grab the real value from the finding.
+                    'customfield_11542': [ { "value": "Production" } ],
                     'description': jira_description(find),
                     'issuetype': {
                         'name': jira_instance.default_issue_type
-                    },
+                    }
             }
 
             #CUSTOM HS Code

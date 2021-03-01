@@ -21,6 +21,19 @@
 *CVE:* Unknown
 {% endif %}
 
+{% if finding.cvssv3 %}
+*CVSSv3:* {{ finding.cvssv3 }}
+
+https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator?vector={{ finding.cvssv3 }}
+{% else %}
+*CVSSv3:* Not Scored
+{% endif %}
+
+{% if finding.file_path %}
+*File:* {{ finding.file_path }}
+{% endif %}
+
+
 *Product/Engagement/Test:* [{{ finding.test.engagement.product.name }}|{{ product_url|full_url }}] / [{{ finding.test.engagement.name }}|{{ engagement_url|full_url }}] / [{{ finding.test }}|{{ test_url|full_url }}]
 
 *Branch/Tag:* {{ finding.test.engagement.branch_tag }}

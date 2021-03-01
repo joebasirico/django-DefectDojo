@@ -2,13 +2,13 @@
 
 class SemgrepJSONResult:
 
-    def __init__(self, extra=None, path='', start=None, end=None):
+    def __init__(self, title=None, extra=None, path='', start=None, end=None):
         self.path = path
 
         self.start = 0
         self.end = 0
         self.severity = "Info"
-        self.title = "SemGrep detection rule"
+        self.title = title[0:60]
         self.message = "Detected by semgrep rule"
         self.fix = "None"
         self.lines = "None"
@@ -28,16 +28,18 @@ class SemgrepJSONResult:
         metadata, metavars = extra.get('metadata'), extra.get('metavars')
         self.fix = extra.get('fix')
         self.lines = extra.get('lines')
-        self.message = extra.get('message')
+        self.message = extra.get('message') + "\n\n\n------------------------\n\n" + extra.get('lines')
 
         if not metadata:
             return
 
         # parse CWE
-        if metadata.get("cwe").partition(':')[2]:
-            self.title = metadata.get("cwe").partition(':')[2]
+        cwe = metadata.get("cwe")
+        if cwe is not None:
+            if  cwe.partition(':')[2]:
+                self.title = cwe.partition(':')[2]
+            self.cwe = cwe.partition(':')[0].partition('-')[2]
 
-        self.cwe = metadata.get("cwe").partition(':')[0].partition('-')[2]
         # Convert Semgrep severity to defectDojo Severity
         semSeverity = extra.get('severity')
 
